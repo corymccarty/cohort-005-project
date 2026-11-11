@@ -72,6 +72,8 @@ async function seed() {
 
   // Drop and recreate tables for a clean seed
   sqlite.exec(`
+    DROP TABLE IF EXISTS bookmarks;
+    DROP TABLE IF EXISTS notes;
     DROP TABLE IF EXISTS comments;
     DROP TABLE IF EXISTS course_ratings;
     DROP TABLE IF EXISTS video_watch_events;
@@ -2790,6 +2792,27 @@ This course is still in draft while the cluster examples are rewritten against t
 
   console.log("Created Liam's Refund Request.");
 
+  // ─── Liam's Bookmarks and Note ───
+  // So the Saved page and the Lesson page's note box have something to show.
+
+  db.insert(schema.bookmarks)
+    .values([
+      { userId: liam.id, lessonId: course1LessonIds[1], createdAt: daysAgo(7) },
+      { userId: liam.id, lessonId: course1LessonIds[3], createdAt: daysAgo(5) },
+    ])
+    .run();
+  db.insert(schema.notes)
+    .values({
+      userId: liam.id,
+      lessonId: course1LessonIds[1],
+      body: "Rewatch the second half.\n# and * are kept as typed.",
+      createdAt: daysAgo(7),
+      updatedAt: daysAgo(6),
+    })
+    .run();
+
+  console.log("Created Liam's Bookmarks and Note.");
+
   // ─── Marta's Refund Request ───
   // A Team Licence with no Claimed Seats, so a Platform Admin can approve it.
   // Its Seats are on hold while the request is open.
@@ -2847,6 +2870,9 @@ This course is still in draft while the cluster examples are rewritten against t
   console.log(`  Enrollments: ${countRows(schema.enrollments)}`);
   console.log(`  Course ratings: ${countRows(schema.courseRatings)}`);
   console.log(`  Lesson comments: ${countRows(schema.comments)}`);
+  console.log(
+    `  Bookmarks: ${countRows(schema.bookmarks)}, notes: ${countRows(schema.notes)}`
+  );
   console.log(
     `  Lesson progress: ${countRows(schema.lessonProgress)} (${countRows(schema.lessonProgress, eq(schema.lessonProgress.status, LessonProgressStatus.Completed))} completed)`
   );
