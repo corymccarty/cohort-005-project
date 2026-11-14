@@ -6,7 +6,6 @@ export type NoteDraft = {
   limit: number;
   empty: boolean;
   tooLong: boolean;
-  /** Whether the note is unchanged from the saved one. */
   unchanged: boolean;
   canSave: boolean;
 };
