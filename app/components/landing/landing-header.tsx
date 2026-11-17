@@ -6,11 +6,11 @@ import { useDarkMode } from "~/components/use-dark-mode";
 export function LandingHeader({ signedIn }: { signedIn: boolean }) {
   return (
     <header className="border-b border-border">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-6">
         <Link to="/" className="text-xl font-bold tracking-tight">
           Cadence
         </Link>
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-2 sm:gap-6">
           <Link to="/courses" className={NAV_LINK}>
             Courses
           </Link>
@@ -36,7 +36,7 @@ export function LandingHeader({ signedIn }: { signedIn: boolean }) {
 }
 
 const NAV_LINK =
-  "text-sm font-medium text-muted-foreground transition-colors hover:text-foreground";
+  "whitespace-nowrap text-sm font-medium text-muted-foreground transition-colors hover:text-foreground";
 
 function ThemeToggle() {
   const { isDark, toggleDarkMode } = useDarkMode();
