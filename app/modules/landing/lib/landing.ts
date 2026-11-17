@@ -101,10 +101,12 @@ function getCatalogueStats(db: Db): CatalogueStats {
     .innerJoin(courses, and(eq(modules.courseId, courses.id), isPublished))
     .get();
   return {
-    courses: courseStats?.courses ?? 0,
-    instructors: courseStats?.instructors ?? 0,
-    categories: courseStats?.categories ?? 0,
-    lessons: lessonStats?.lessons ?? 0,
+    courses: 0,
+    instructors: 0,
+    categories: 0,
+    lessons: 0,
+    ...courseStats,
+    ...lessonStats,
   };
 }
 
