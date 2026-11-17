@@ -3,7 +3,7 @@ import { createTestDb, seedBaseData, type TestDb } from "~/test/setup";
 import * as schema from "~/db/schema";
 import { CourseStatus, UserRole } from "~/db/schema";
 import { markdown } from "~/lib/text";
-import { createLanding, FEATURED_COURSE_LIMIT } from "../index.server";
+import { createLanding } from "../index.server";
 
 let db: TestDb;
 let base: ReturnType<typeof seedBaseData>;
@@ -90,7 +90,6 @@ describe("spotlight and featured courses", () => {
     const { spotlight, featuredCourses } = get();
 
     expect(spotlight?.title).toBe("Newest");
-    expect(FEATURED_COURSE_LIMIT).toBe(3);
     expect(featuredCourses.map((c) => c.title)).toEqual([
       "Newer",
       "Middle",

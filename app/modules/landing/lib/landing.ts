@@ -12,7 +12,7 @@ import {
 
 export type Db = BetterSQLite3Database<typeof schema>;
 
-export const FEATURED_COURSE_LIMIT = 3;
+const FEATURED_COURSE_LIMIT = 3;
 const NEWEST_COURSE_LIMIT = FEATURED_COURSE_LIMIT + 1;
 
 export type FeaturedCourse = {
