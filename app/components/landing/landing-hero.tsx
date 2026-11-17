@@ -1,7 +1,8 @@
 import { Link } from "react-router";
-import { ArrowRight, BookOpen, Check, User } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { CourseImage } from "~/components/course-image";
+import { CourseMeta } from "~/components/landing/course-meta";
 import type { FeaturedCourse } from "~/modules/landing/index.server";
 
 const PROMISES = [
@@ -93,16 +94,7 @@ function SpotlightCard({ course }: { course: FeaturedCourse }) {
           <p className="line-clamp-2 text-sm text-muted-foreground">
             {course.description}
           </p>
-          <div className="flex items-center justify-between pt-2 text-xs text-muted-foreground">
-            <span className="flex items-center gap-1">
-              <User className="size-3" />
-              {course.instructorName}
-            </span>
-            <span className="flex items-center gap-1">
-              <BookOpen className="size-3" />
-              {course.lessonCount} lessons
-            </span>
-          </div>
+          <CourseMeta course={course} className="pt-2" />
         </div>
       </Link>
     </div>
