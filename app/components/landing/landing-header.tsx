@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "~/components/ui/button";
+import { useDarkMode } from "~/components/use-dark-mode";
 
 export function LandingHeader({ signedIn }: { signedIn: boolean }) {
   return (
@@ -39,20 +39,7 @@ const NAV_LINK =
   "text-sm font-medium text-muted-foreground transition-colors hover:text-foreground";
 
 function ThemeToggle() {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    setIsDark(document.documentElement.classList.contains("dark"));
-  }, []);
-
-  function toggleDarkMode() {
-    const next = !isDark;
-    setIsDark(next);
-    document.documentElement.classList.toggle("dark", next);
-    try {
-      localStorage.setItem("cadence-theme", next ? "dark" : "light");
-    } catch {}
-  }
+  const { isDark, toggleDarkMode } = useDarkMode();
 
   return (
     <button
